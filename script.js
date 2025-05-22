@@ -1,23 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    if(document.innerWidth > 480){
-        document.getElementById('menu').style.display = 'none';
-        document.getElementById('close').style.display = 'none';
-        document.getElementById('nav').style.display = 'block';
-    }else {
-        document.getElementById('menu').addEventListener('click', () => {
-            document.getElementById('nav').style.display = 'block';
-            document.getElementById('menu').style.display = 'none';
+    const menu = document.getElementById('menu');
+    const close = document.getElementById('close');
+    const nav = document.getElementById('nav');
 
-            document.getElementById('close').addEventListener('click', () => {
-                document.getElementById('nav').style.display = 'none';
-                document.getElementById('menu').style.display = 'block';
+    const updateDisplay = () => {
+        if (window.innerWidth > 480) {
+            menu.style.display = 'none';
+            close.style.display = 'none';
+            nav.style.display = 'block';
+        } else {
+            menu.style.display = 'block';
+            close.style.display = 'none';
+            nav.style.display = 'none';
+        }
+    };
 
-                if(document.innerWidth > 480){
-                    document.getElementById('menu').style.display = 'none';
-                    document.getElementById('close').style.display = 'none';
-                    document.getElementById('nav').style.display = 'block';
-                }
-            });
-        });
-    }
+    updateDisplay(); // set initial state
+
+    menu.addEventListener('click', () => {
+        nav.style.display = 'block';
+        menu.style.display = 'none';
+        close.style.display = 'block';
+    });
+
+    close.addEventListener('click', () => {
+        nav.style.display = 'none';
+        menu.style.display = 'block';
+        close.style.display = 'none';
+    });
+
+    window.addEventListener('resize', updateDisplay); // update UI on resize
 });
